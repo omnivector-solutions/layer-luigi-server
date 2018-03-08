@@ -1,0 +1,6 @@
+options:
+  sendgrid-creds:
+    type: string
+    default: ""
+    description: |
+      username:password for sendgrid account

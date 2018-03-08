@@ -1,18 +1,37 @@
 from charms.reactive import endpoint_from_flag, set_flag, when, when_not
-from charmhelpers.core.hookenv import open_port, status_set
+from charmhelpers.core.hookenv import config, open_port, status_set
 
-
-LUIGI_SERVER_PORT = 8082
+from charms.layer.luigi_server import render_luigi_config, LUIGI_SERVER_PORT
 
 
 @when('snap.installed.luigi-server')
-@when_not('luigi.init.complete')
+@when_not('luigi.config.check.complete')
+def configure_luigid():
+    """Configure Luigi-Server
+    """
+
+    ctxt = {}
+    conf = config()
+
+    if conf.get('sendgrid-creds'):
+        ctxt['sendgrid'] = \
+            {'username': conf.get('sendgrid-creds').split(':')[0],
+             'password': conf.get('sendgrid-creds').split(':')[1]}
+        ctxt['core'] = {'send_failure_email': True}
+
+    render_luigi_config(ctxt=ctxt)
+
+    set_flag('luigi.config.check.complete')
+
+
+@when('snap.installed.luigi-server')
+@when_not('luigi.http.port.available')
 def open_port_set_status():
     """Open port and set status when luigi snap is installed.
     """
     open_port(LUIGI_SERVER_PORT)
     status_set('active', "Luigi-Server available")
-    set_flag('luigi.init.complete')
+    set_flag('luigi.http.port.available')
 
 
 @when('http.available')

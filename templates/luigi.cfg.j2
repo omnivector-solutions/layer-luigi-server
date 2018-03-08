@@ -1,0 +1,5 @@
+{% if ctxt.get('sendgrid') %}
+[sendgrid]
+username = "{{ ctxt['sendgrid']['username'] }}"
+password = "{{ ctxt['sendgrid']['password'] }}"
+{% endif %}
