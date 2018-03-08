@@ -15,9 +15,9 @@ def open_port_set_status():
     set_flag('luigi.init.complete')
 
 
-@when('endpoint.http.joined')
+@when('http.available')
 def provide_http_relation_data():
     """Provide http relation data
     """
-    endpoint = endpoint_from_flag('endpoint.http.joined')
-    endpoint.configure(port=LUIGI_SERVER_PORT)
+    endpoint = endpoint_from_flag('http.available')
+    endpoint.configure(LUIGI_SERVER_PORT)
