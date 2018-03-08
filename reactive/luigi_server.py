@@ -1,4 +1,4 @@
-from charms.reactive import endpoint_from_flag, when, when_not
+from charms.reactive import endpoint_from_flag, set_flag, when, when_not
 from charmhelpers.core.hookenv import open_port, status_set
 
 
