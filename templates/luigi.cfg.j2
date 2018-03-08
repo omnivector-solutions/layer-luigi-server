@@ -3,3 +3,10 @@
 username = "{{ ctxt['sendgrid']['username'] }}"
 password = "{{ ctxt['sendgrid']['password'] }}"
 {% endif %}
+
+{% if ctxt.get('hive') %}
+[hive]
+metastore_host = "{{ ctxt['hive']['metastore_host'] }}"
+metastore_port = "{{ ctxt['hive']['metastore_port'] }}"
+release = "apache"
+{% endif %}

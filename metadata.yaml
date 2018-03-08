@@ -13,6 +13,10 @@ series:
 provides:
   http:
     interface: http
+requires:
+  hive:
+    interface: hive
+
 resources:
   luigi-server:
     type: file

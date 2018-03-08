@@ -1,4 +1,11 @@
-from charms.reactive import endpoint_from_flag, set_flag, when, when_not
+from charms.reactive import (
+    endpoint_from_flag,
+    is_state,
+    set_flag,
+    when,
+    when_not
+)
+
 from charmhelpers.core.hookenv import config, open_port, status_set
 
 from charms.layer.luigi_server import render_luigi_config, LUIGI_SERVER_PORT
@@ -18,6 +25,12 @@ def configure_luigid():
             {'username': conf.get('sendgrid-creds').split(':')[0],
              'password': conf.get('sendgrid-creds').split(':')[1]}
         ctxt['core'] = {'send_failure_email': True}
+
+    if is_state('hive.ready'):
+        hive = RelationBase.from_state('hive.ready')
+        ctxt['hive'] = \
+            {'metastore_host': hive.get_private_ip(),
+             'metastore_port': hive.get_port()}
 
     render_luigi_config(ctxt=ctxt)
 
