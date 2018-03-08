@@ -2,6 +2,10 @@
 [sendgrid]
 username = "{{ ctxt['sendgrid']['username'] }}"
 password = "{{ ctxt['sendgrid']['password'] }}"
+
+[email]
+method = "{{ ctxt['email']['method'] }}"
+receiver = "{{ ctxt['email']['receiver'] }}"
 {% endif %}
 
 {% if ctxt.get('hive') %}

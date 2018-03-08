@@ -4,7 +4,7 @@ from pathlib import Path
 
 from jinja2 import Environment, FileSystemLoader
 
-from charmhelpers.core.hookenv import config, charm_dir
+from charmhelpers.core.hookenv import charm_dir
 
 
 LUIGI_SERVER_PORT = 8082

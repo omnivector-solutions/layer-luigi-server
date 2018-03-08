@@ -4,3 +4,8 @@ options:
     default: ""
     description: |
       username:password for sendgrid account
+  email-recipient:
+    type: string
+    default: ""
+    description: |
+      Recipient of emails from luigi-server
