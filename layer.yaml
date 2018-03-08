@@ -1,0 +1,9 @@
+includes:
+  - layer:basic
+  - layer:snap
+  - interface:http
+options:
+  snap:
+    luigi-server:
+      channel: stable
+repo: "https://github.com/omnivector-solutions/layer-luigi-server"

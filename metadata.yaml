@@ -1,0 +1,20 @@
+name: luigi-server
+summary: Luigi server + web gui
+maintainer: James Beedy <jamesbeedy@gmail.com>
+description: |
+  Luigi server + web GUI.
+tags:
+  - luigi
+  - spark
+  - bigdata
+  - web
+series:
+  - xenial
+provides:
+  http:
+    interface: http
+resources:
+  luigi-server:
+    type: file
+    filename: luigi-server.snap
+    description: Luigi server snap
