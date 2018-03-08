@@ -10,12 +10,15 @@ tags:
   - web
 series:
   - xenial
+
 provides:
   http:
     interface: http
 requires:
   hive:
     interface: hive
+  spark:
+    interface: spark
 
 resources:
   luigi-server:

@@ -1,6 +1,7 @@
 from charms.reactive import (
     endpoint_from_flag,
     is_state,
+    RelationBase,
     set_flag,
     when,
     when_not
@@ -32,6 +33,13 @@ def configure_luigid():
             {'metastore_host': hive.get_private_ip(),
              'metastore_port': hive.get_port()}
 
+`    if is_state('spark.ready'):
+        spark = RelationBase.from_state('spark.ready')
+        ctxt['spark'] = \
+            {'master': "spark://{}:{}".format(
+                spark.get_master_ip(), spark.get_master_port()}
+`
+
     render_luigi_config(ctxt=ctxt)
 
     set_flag('luigi.config.check.complete')
@@ -40,7 +48,7 @@ def configure_luigid():
 @when('snap.installed.luigi-server')
 @when_not('luigi.http.port.available')
 def open_port_set_status():
-    """Open port and set status when luigi snap is installed.
+    """Open port and set status when luigi snap is installed
     """
     open_port(LUIGI_SERVER_PORT)
     status_set('active', "Luigi-Server available")

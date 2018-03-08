@@ -10,3 +10,8 @@ metastore_host = "{{ ctxt['hive']['metastore_host'] }}"
 metastore_port = "{{ ctxt['hive']['metastore_port'] }}"
 release = "apache"
 {% endif %}
+
+{% if ctxt.get('spark') %}
+[spark]
+master = "{{ ctxt['spark']['master'] }}"
+{% endif %}
