@@ -49,7 +49,9 @@ def configure_luigid():
 
     if is_flag_set('spark.ready'):
         spark = RelationBase.from_flag('spark.ready')
-        ctxt['spark'] = {'master': spark.get_master_url()}
+        ctxt['spark'] = \
+            {'master': "spark://{}:{}".format(
+                spark.get_master_ip(), spark.get_rest_port()}
 
     render_luigi_config(ctxt=ctxt)
     set_flag('luigi.config.check.complete')
