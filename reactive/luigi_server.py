@@ -11,7 +11,7 @@ def open_port_set_status():
     """Open port and set status when luigi snap is installed.
     """
     open_port(LUIGI_SERVER_PORT)
-    status_set('active', "Luigi Server: http://{}")
+    status_set('active', "Luigi-Server available")
     set_flag('luigi.init.complete')
 
 
